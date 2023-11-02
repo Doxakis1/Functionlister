@@ -6,7 +6,7 @@
 /*   By: mkaratzi <mkaratzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:15:38 by mkaratzi          #+#    #+#             */
-/*   Updated: 2023/11/02 10:45:01 by mkaratzi         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:45:46 by mkaratzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,14 @@ void	ft_bzero(void *s, size_t n)
 		((char *)s)[i] = '\0';
 		i++;
 	}
+}
+
+int	ft_isalnum(int a)
+{
+	if ((a >= '0' && a <= '9') || (a >= 'a' && a
+			<= 'z') || (a >= 'A' && a <= 'Z'))
+		return (1);
+	else
+		return (0);
 }
 

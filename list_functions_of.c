@@ -6,31 +6,93 @@
 /*   By: mkaratzi <mkaratzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 10:21:15 by mkaratzi          #+#    #+#             */
-/*   Updated: 2023/11/02 10:47:15 by mkaratzi         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:46:04 by mkaratzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "functionlister.h"
 
-int	tokenise(const char *str)
+int	isnot_c_keyword(const char *keyword)
 {
-	char	types[200][100];
-	char	variables[30][100];
-	char	functions_names[200][100];
-	char	*line;
+	int					i;
+    static const char	*c_keywords[] = {
+        "if", "while", "for", "switch", "do", "return", "goto", "sizeof", \
+		"break","\0"
+    };
 
-	ft_bzero(&types, sizeof(char *) * 200 + sizeof(char) * 100);
-	ft_bzero(&variables, sizeof(char *) * 30 + sizeof(char) * 100);
-	ft_bzero(&functions_names, sizeof(char *) * 200 + sizeof(char) * 100);
+	i = 0;
+    while (i < 10) {
+        if (ft_strcmp(keyword, c_keywords[i++]) == 0)
+			return EXIT_SUCCESS;
+    }
+    return EXIT_FAILURE;
+}
 
-	
+int	get_previous_word(char *str)
+{
+	int	size;
+
+	size = ft_strlen(str);
+	if (--size <= 0)
+		return (-1);
+	if (str[size] == ' ' || str[size] == '\t' || str[size] == '\n')
+	{
+		while (size >= 0 && (str[size] == ' ' || str[size] == '\t' \
+			|| str[size] == '\n'))
+			size--;
+		if (size == 0)
+			return (0);
+		else
+			str[size + 1] = '\0';
+	}
+	if (!ft_isalnum(str[size]))
+		return (-1);
+	while (size >= 0)
+	{
+		if (!ft_isalnum(str[size]) && str[size] != '_')
+			return (size + 1);
+		size--;
+	}
+	return (size);
+}
+
+int	print_func(const char *str)
+{
+	write(STDOUT_FILENO, "\t", 1);
+	write(STDOUT_FILENO, str, ft_strlen(str));
+	write(STDOUT_FILENO, "()\n", 3);
+	return (EXIT_SUCCESS);
+}
+
+int	print_functions(const int file_fd)
+{
+	char	buffer[1024];
+	int		index;
+	int		read_bytes;
+	int		word_index;
+
+	index = 0;
+	word_index = 0;
+	read_bytes = read(file_fd, &buffer[index], 1);
+	while (read_bytes > 0 && index < 1024)
+	{
+		if (buffer[index] == '(')
+		{
+			buffer[index] = '\0';
+			word_index = get_previous_word(buffer);
+			if (word_index != -1 && isnot_c_keyword(&buffer[word_index]) )
+				print_func(&buffer[word_index]);
+			index = -1;
+		}
+		read_bytes = read(file_fd, &buffer[++index], 1);	
+	}
+	return (EXIT_SUCCESS);
 }
 
 int	list_functions_of(const char *str)
 {
 	int		size;
 	int		file_fd;
-	char	*line;
 
 	size = ft_strlen(str);
 	if (size  <= 2 || str[size - 1] != 'c' || str[size - 2] != '.')
@@ -38,8 +100,11 @@ int	list_functions_of(const char *str)
 	file_fd = open(str, O_RDONLY);
 	if (file_fd == -1)
 		return (ft_return_error(OPEN_FAIL));
-	write(STDIN_FILENO, "Within file: ", 13);
-	write(STDIN_FILENO, str, size);
-	write(STDIN_FILENO, "\n", 1);
-	tokenise()
+	write(STDOUT_FILENO, "Within file: ", 13);
+	write(STDOUT_FILENO, str, ft_strlen(str));
+	write(STDOUT_FILENO, "\n", 1);
+	print_functions(file_fd);
+	write(STDOUT_FILENO, "\n", 1);
+	close(file_fd);
+	return (EXIT_SUCCESS);
 }

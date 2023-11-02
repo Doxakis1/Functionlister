@@ -6,7 +6,7 @@
 /*   By: mkaratzi <mkaratzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 09:27:31 by mkaratzi          #+#    #+#             */
-/*   Updated: 2023/11/02 10:21:01 by mkaratzi         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:52:01 by mkaratzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int ac, char **av)
 	char	*pwd;
 	char	*temp;
 	char	*temp2;
+	char	*pointers[2];
 	DIR		*folder;
 	struct dirent *entry;
 
@@ -39,7 +40,9 @@ int	main(int ac, char **av)
 		{
 			temp = ft_strjoin(pwd, "/");
 			temp2 = ft_strjoin(temp, entry->d_name);
-			main(2, (char **){av[0], temp2, (void *)0});
+			pointers[0] = av[0];
+			pointers[1] = temp2;
+			main(2, pointers);
 			free(temp);
 			temp = (void *)0;
 			free(temp2);

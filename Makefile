@@ -3,7 +3,6 @@ NAME = functionlister
 SRC = \
 	main.c \
 	utilities.c \
-	get_next_line.c \
 	list_functions_of.c \
 
 OFILES = $(SRC:%.c=%.o)
