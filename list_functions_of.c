@@ -6,7 +6,7 @@
 /*   By: mkaratzi <mkaratzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 10:21:15 by mkaratzi          #+#    #+#             */
-/*   Updated: 2023/11/04 13:49:57 by mkaratzi         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:53:31 by mkaratzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	print_func(const char *str)
 	return (EXIT_SUCCESS);
 }
 
-int	add_to_function_list(char (*functions)[MAX_FUNC_NAME_SIZE], char *new_function)
+int	add_to_function_list(char functions[][MAX_FUNC_NAME_SIZE], char *new_function)
 {
 	int fun_counter;
 	int	index_counter;
