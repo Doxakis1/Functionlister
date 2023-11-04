@@ -7,7 +7,7 @@ SRC = \
 
 OFILES = $(SRC:%.c=%.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address,undefined
 
 .PHONY: all clean fclean re
 

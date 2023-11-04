@@ -6,7 +6,7 @@
 /*   By: mkaratzi <mkaratzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 09:27:31 by mkaratzi          #+#    #+#             */
-/*   Updated: 2023/11/02 11:52:01 by mkaratzi         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:11:21 by mkaratzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 		pwd = av[1];
 	folder = opendir(pwd);
     if (folder == NULL) {
-        ft_return_error(OPEN_DIR_FAIL);
+        return(ft_return_error(OPEN_DIR_FAIL));
     }
 	temp = (void *)0;
 	temp2 = (void *)0;

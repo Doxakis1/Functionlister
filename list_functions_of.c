@@ -6,7 +6,7 @@
 /*   By: mkaratzi <mkaratzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 10:21:15 by mkaratzi          #+#    #+#             */
-/*   Updated: 2023/11/04 13:53:31 by mkaratzi         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:22:35 by mkaratzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	add_to_function_list(char functions[][MAX_FUNC_NAME_SIZE], char *new_functio
 
 int	print_functions(const int file_fd)
 {
-	char	buffer[1024];
+	char	buffer[BUFFER_SIZE];
 	char	functions[MAX_FUNCS][MAX_FUNC_NAME_SIZE];
 	int		index;
 	int		read_bytes;
@@ -94,9 +94,9 @@ int	print_functions(const int file_fd)
 
 	index = 0;
 	word_index = 0;
-	ft_bzero(&functions, sizeof(char *) * 200 + sizeof(char) * 100);
+	ft_bzero(&functions, sizeof(char *) * MAX_FUNCS + sizeof(char) * MAX_FUNC_NAME_SIZE);
 	read_bytes = read(file_fd, &buffer[index], 1);
-	while (read_bytes > 0 && index < 1024)
+	while (read_bytes > 0 && index < BUFFER_SIZE)
 	{
 		if (buffer[index] == '(')
 		{
@@ -106,7 +106,9 @@ int	print_functions(const int file_fd)
 				add_to_function_list(functions, &buffer[word_index]);
 			index = -1;
 		}
-		read_bytes = read(file_fd, &buffer[++index], 1);	
+		++index;
+		if (index < 1024)
+			read_bytes = read(file_fd, &buffer[index], 1);	
 	}
 	word_index = -1;
 	while (++word_index < 200 && functions[word_index][0] != '\0')
