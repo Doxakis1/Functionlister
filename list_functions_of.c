@@ -6,7 +6,7 @@
 /*   By: mkaratzi <mkaratzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 10:21:15 by mkaratzi          #+#    #+#             */
-/*   Updated: 2023/11/04 16:22:35 by mkaratzi         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:29:35 by mkaratzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	print_functions(const int file_fd)
 	read_bytes = read(file_fd, &buffer[index], 1);
 	while (read_bytes > 0 && index < BUFFER_SIZE)
 	{
-		if (buffer[index] == '(')
+		if (buffer[index] == '(' && index != 0)
 		{
 			buffer[index] = '\0';
 			word_index = get_previous_word(buffer);
@@ -107,7 +107,7 @@ int	print_functions(const int file_fd)
 			index = -1;
 		}
 		++index;
-		if (index < 1024)
+		if (index < BUFFER_SIZE)
 			read_bytes = read(file_fd, &buffer[index], 1);	
 	}
 	word_index = -1;

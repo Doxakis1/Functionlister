@@ -7,7 +7,9 @@ SRC = \
 
 OFILES = $(SRC:%.c=%.o)
 
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address,undefined
+FLAGS = -Wall -Wextra -Werror
+
+DEBUG_FLAGS = -g -fsanitize=address,undefined
 
 .PHONY: all clean fclean re
 
@@ -18,7 +20,8 @@ $(NAME): $(OFILES)
 
 clean: 
 	rm -f $(OFILES)
-
+debug: $(OFILES)
+	cc $(FLAGS) $(DEBUG_FLAGS) $(OFILES) -o $(NAME)
 fclean: clean
 	rm -f $(NAME)
 

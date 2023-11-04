@@ -6,7 +6,7 @@
 /*   By: mkaratzi <mkaratzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 09:27:52 by mkaratzi          #+#    #+#             */
-/*   Updated: 2023/11/04 16:18:28 by mkaratzi         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:30:25 by mkaratzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define OPEN_DIR_FAIL 3
 # define MAX_FUNCS 200
 # define MAX_FUNC_NAME_SIZE 128
-# define BUFFER_SIZE 10048
+# define BUFFER_SIZE 16384
 
 
 int			ft_print_error(const char *str);
