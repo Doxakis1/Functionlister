@@ -6,7 +6,7 @@
 /*   By: mkaratzi <mkaratzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 09:27:52 by mkaratzi          #+#    #+#             */
-/*   Updated: 2023/11/02 12:15:46 by mkaratzi         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:50:47 by mkaratzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define OPEN_FAIL 1
 # define MALLOC_FAILED 2
 # define OPEN_DIR_FAIL 3
+# define MAX_FUNCS 200
+# define MAX_FUNC_NAME_SIZE 128
 
 
 int			ft_print_error(const char *str);
